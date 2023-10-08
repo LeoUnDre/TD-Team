@@ -3,7 +3,10 @@ using UnityEngine;
 public class TowerControl : MonoBehaviour
 {
     [SerializeField] Gun gun;
+    [SerializeField] Transform bulletSpawn;
     private Camera _cam;
+
+    public int HP = 3;
 
     Vector3 lookPos;
 
@@ -23,7 +26,11 @@ public class TowerControl : MonoBehaviour
         Mover();
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            gun.Shoot();
+            gun.Shoot(this.gameObject, bulletSpawn);
+        }
+        if(HP == 0)
+        {
+            GameOver();
         }
     }
 
@@ -44,4 +51,8 @@ public class TowerControl : MonoBehaviour
         transform.LookAt(transform.position + lookDir, Vector3.up);
     }
 
+    private void GameOver()
+    {
+        Destroy(gameObject);
+    }
 }

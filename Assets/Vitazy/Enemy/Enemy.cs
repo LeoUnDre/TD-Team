@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] public Transform player;
+    [SerializeField] public GameObject player;
     private float speed = 5.0f;
     void Start()
     {
@@ -13,6 +13,13 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+        Transform playerPos = player.GetComponent<Transform>();
+        transform.LookAt(playerPos.position);
+        transform.position = Vector3.MoveTowards(transform.position, playerPos.position, speed * Time.deltaTime);
+        if (transform.position == playerPos.position)
+        {
+            Destroy(this.gameObject);
+            player.GetComponent<TowerControl>().HP -= 1;
+        };
     }
 }
