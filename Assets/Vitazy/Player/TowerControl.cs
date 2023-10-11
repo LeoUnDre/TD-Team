@@ -1,9 +1,11 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TowerControl : MonoBehaviour
 {
     [SerializeField] Gun gun;
     [SerializeField] Transform bulletSpawn;
+    [SerializeField] GameObject gameSpawn;
     private Camera _cam;
 
     public int HP = 3;
@@ -53,6 +55,24 @@ public class TowerControl : MonoBehaviour
 
     private void GameOver()
     {
+        List<Enemy> enemiesList = new List<Enemy>(FindObjectsOfType<Enemy>());
+        Enemy[] enemiesArray = enemiesList.ToArray();
+
+        for (int i = 0; i < enemiesArray.Length; i++)
+        {
+            Destroy(enemiesArray[i]);
+        }
+
+        Destroy(gameSpawn);
         Destroy(gameObject);
+    }
+
+    public void Takedamage()
+    {
+        HP -= 1;
+        if(HP == 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

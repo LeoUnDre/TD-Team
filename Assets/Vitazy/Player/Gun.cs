@@ -28,7 +28,6 @@ public class Gun : MonoBehaviour
             objclone.GetComponent<Rigidbody>().AddForce(bulletSpawner.transform.forward * power);
             Destroy(objclone, 10);
 
-
             Debug.DrawRay(ray.origin, ray.direction * shootdistance, Color.blue, 1);
         }
         else if (types.GetComponent<RangeEnemy>() != null)
