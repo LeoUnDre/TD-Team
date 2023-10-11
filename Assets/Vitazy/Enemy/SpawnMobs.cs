@@ -10,7 +10,7 @@ public class SpawnMobs : MonoBehaviour
     [SerializeField] GameObject[] prefabSpawn;
     [SerializeField] GameObject playerTarget;
 
-    private float timeSpawn = 3f;
+    private float timeSpawn = 1f;
 
     private float timer;
 
@@ -27,11 +27,13 @@ public class SpawnMobs : MonoBehaviour
     {
         timer -= Time.deltaTime;
         if (timer < 0 && count != 0)
-        {
-            timer = timeSpawn;
-            Vector3 pos = prefabSpawn[UnityEngine.Random.Range(0, prefabSpawn.Length - 1)].GetComponent<Transform>().position;
-            Instantiate(prefabEnemy[UnityEngine.Random.Range(0, prefabEnemy.Length - 1)], pos, Quaternion.identity);
-            count--;
+            {
+                timer = timeSpawn;
+                Vector3 pos = prefabSpawn[UnityEngine.Random.Range(0, prefabSpawn.Length)].GetComponent<Transform>().position;
+                pos.x += Random.Range(3, 7);
+                pos.z += Random.Range(3, 7);
+                Instantiate(prefabEnemy[UnityEngine.Random.Range(0, prefabEnemy.Length - 1)], pos, Quaternion.identity);
+                count--;
         }
     }
 }

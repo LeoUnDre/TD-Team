@@ -26,11 +26,15 @@ public class Bullet : MonoBehaviour
     {
         if(collision.collider.gameObject.GetComponent<TowerControl>() != null && isEnemy)
         {
+            collision.collider.gameObject.GetComponent<TowerControl>().Takedamage();
+            Destroy(this.gameObject);
             Debug.Log("Gyra");
         }
         else if(collision.collider.gameObject.GetComponent<Enemy>() != null && !isEnemy)
         {
             Debug.Log("Nya");
+            collision.collider.gameObject.GetComponent<Enemy>().Takedamage();
+            Destroy(this.gameObject);
         }
     }
 }

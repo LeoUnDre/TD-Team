@@ -1,25 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour, IDamageble
 {
-    [SerializeField] public GameObject player;
-    private float speed = 5.0f;
-    void Start()
-    {
-    }
+    public GameObject player;
 
-    // Update is called once per frame
-    void Update()
-    {
-        Transform playerPos = player.GetComponent<Transform>();
-        transform.LookAt(playerPos.position);
-        transform.position = Vector3.MoveTowards(transform.position, playerPos.position, speed * Time.deltaTime);
-        if (transform.position == playerPos.position)
-        {
-            Destroy(this.gameObject);
-            player.GetComponent<TowerControl>().HP -= 1;
-        };
-    }
+    public int HP { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    public int MaxHP { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    public int Damage { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+
+    public abstract void Takedamage();
+
 }
