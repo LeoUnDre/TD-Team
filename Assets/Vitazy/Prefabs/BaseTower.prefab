@@ -172,7 +172,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7c7e978d9a41ea49a9e9ef4467e4c0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpawner: {fileID: 4746306097061526449}
   objbullet: {fileID: 903032692478152822, guid: 8747734dab1ff344fab7be1e676e5858,
     type: 3}
   objclone: {fileID: 0}
@@ -403,3 +402,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 2731349628201759088}
+  bulletSpawn: {fileID: 0}
+  HP: 3

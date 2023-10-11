@@ -9,6 +9,7 @@
       },
       "url": "https://packages.unity.com"
     },
+<<<<<<< Updated upstream
     "com.unity.barracuda": {
       "version": "3.0.0",
       "depth": 1,
@@ -20,6 +21,8 @@
       },
       "url": "https://packages.unity.com"
     },
+=======
+>>>>>>> Stashed changes
     "com.unity.burst": {
       "version": "1.8.7",
       "depth": 1,
