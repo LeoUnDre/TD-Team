@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5830389662494707683}
   - component: {fileID: 6306859335144410219}
   - component: {fileID: 3941650759377802188}
+  - component: {fileID: 591157334487253236}
   m_Layer: 0
   m_Name: P_turret_laser_2
   m_TagString: Untagged
@@ -107,6 +108,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.019615935, y: 0.03405145, z: 0.018622836}
   m_Center: {x: 0.0000000027939677, y: 0.0058087795, z: 0.009311416}
+--- !u!54 &591157334487253236
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1025903496041595299}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4436301716006713953
 GameObject:
   m_ObjectHideFlags: 0
