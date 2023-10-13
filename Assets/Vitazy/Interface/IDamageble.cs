@@ -7,8 +7,15 @@ interface IDamageble
     public int MaxHP { get; set; }
     public int Damage { get; set; }
 
+    public int Exp { get; set; }
+
+
     public void Takedamage()
     {
         HP -= Damage;
+    }
+
+    public void SetEXp()
+    {
     }
 }
