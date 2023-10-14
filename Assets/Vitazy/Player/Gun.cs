@@ -12,6 +12,7 @@ public class Gun : MonoBehaviour
 
     private float shootCooldow;
     private float startShootCooldown = 2f;
+    private float shootCooldowTureel;
 
     public void Shoot(GameObject types, Transform bulletSpawner)
     {
@@ -33,29 +34,30 @@ public class Gun : MonoBehaviour
         }
         else if(types.GetComponent<Autoturell>() != null)
         {
-            objbullet.GetComponent<Bullet>().damage = types.GetComponent<Autoturell>().damage;
-            objbullet.GetComponent<Bullet>().isEnemy = false;
-            Ray ray = new Ray(bulletSpawner.position, bulletSpawner.forward);
-            RaycastHit hit;
-            float shootdistance = 20f;
-            if (Physics.Raycast(ray, out hit, shootdistance))
-                shootdistance = hit.distance;
+            if (shootCooldowTureel <= 0)
+            {
+                objbullet.GetComponent<Bullet>().damage = types.GetComponent<Autoturell>().damage;
+                objbullet.GetComponent<Bullet>().isEnemy = false;
+                objclone = Instantiate(objbullet, bulletSpawner.position, Quaternion.identity);
+                objclone.GetComponent<Rigidbody>().AddForce(bulletSpawner.transform.forward * power);
+                Destroy(objclone, 10);
+                shootCooldowTureel = startShootCooldown;
+            }
 
-            objclone = Instantiate(objbullet, bulletSpawner.position, Quaternion.identity);
-            objclone.GetComponent<Rigidbody>().AddForce(bulletSpawner.transform.forward * power);
-            Destroy(objclone, 10);
-
-            Debug.DrawRay(ray.origin, ray.direction * shootdistance, Color.blue, 1);
+            shootCooldow -= Time.deltaTime;
         }
 
         else if (types.TryGetComponent<BossEnemy>(out BossEnemy bossEnemy)) 
         {
-            objbullet.GetComponent<Bullet>().damage = types.GetComponent<BossEnemy>().Damage;
-            objbullet.GetComponent<Bullet>().isEnemy = true;
-            objclone = Instantiate(objbullet, bulletSpawner.position, Quaternion.identity);
-            objclone.GetComponent<Rigidbody>().AddForce(bulletSpawner.transform.forward * power);
-            Destroy(objclone, 10);
-            shootCooldow = startShootCooldown;
+            if (shootCooldow <= 0)
+            {
+                objbullet.GetComponent<Bullet>().damage = types.GetComponent<RangeEnemy>().Damage;
+                objbullet.GetComponent<Bullet>().isEnemy = true;
+                objclone = Instantiate(objbullet, bulletSpawner.position, Quaternion.identity);
+                objclone.GetComponent<Rigidbody>().AddForce(bulletSpawner.transform.forward * power);
+                Destroy(objclone, 10);
+                shootCooldow = startShootCooldown;
+            }
         }
         else if (types.GetComponent<RangeEnemy>() != null)
         {

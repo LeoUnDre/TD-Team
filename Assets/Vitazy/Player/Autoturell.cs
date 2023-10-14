@@ -42,18 +42,7 @@ public class Autoturell : MonoBehaviour
         transform.rotation = ownerSpawn.transform.rotation;
         if (target != null)
         {
-            if (target.GetComponent<MeleeEnemy>() != null)
-            {
-                Vector3 lookDir = target.GetComponent<Transform>().position;
-
-                gun.GetComponent<Gun>().Shoot(this.gameObject, bulletSpawn);
-
-                Debug.Log(lookDir);
-            }
-            else if (target.GetComponent<RangeEnemy>() != null)
-            {
-
-            }
+            gun.GetComponent<Gun>().Shoot(this.gameObject, bulletSpawn);
         }
     }
 

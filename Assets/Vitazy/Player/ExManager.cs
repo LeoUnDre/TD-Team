@@ -15,8 +15,8 @@ public class ExManager : MonoBehaviour
     [SerializeField] GameObject[] LaserPrefabs;
     [SerializeField] GameObject[] MachinePrefabs;
     [SerializeField] GameObject platform;
-    [SerializeField] List<GameObject> TurrelPrefabs;
-    public int SelectedIndex;
+    [SerializeField]public List<GameObject> TurrelPrefabs;
+    [SerializeField] public int SelectedIndex;
     private Autoturell tOwner;
     private int Xp;
     private int NextLevelXp;
@@ -96,7 +96,7 @@ public class ExManager : MonoBehaviour
     {
         if (TurrelPrefabs != null)
         {
-            if (!IsFree())
+            if (!IsFree(TurrelPrefabs, SelectedIndex))
             {
                 GameObject turrell = TurrelPrefabs[SelectedIndex];
                 GameObject turrel = Instantiate(prefab[0], turrell.transform.position, Quaternion.identity);
@@ -115,11 +115,11 @@ public class ExManager : MonoBehaviour
         }
     }
 
-    public bool IsFree()
+    public bool IsFree(List<GameObject> turrelPrefab, int selInd)
     {
-        if (SelectedIndex <= 0)
+        if (selInd <= 0)
         {
-            return TurrelPrefabs[SelectedIndex].GetComponent<StandManager>().isFree;
+            return turrelPrefab[selInd].GetComponent<StandManager>().isFree;
         }
         else
         {
@@ -133,7 +133,6 @@ public class ExManager : MonoBehaviour
         {
             if (selectedTurret.Level < selectedTurret.LevelPrefabs.Length)
             {
-                // Улучшаем турель на один уровень
                 selectedTurret.LevelUp();
             }
             else

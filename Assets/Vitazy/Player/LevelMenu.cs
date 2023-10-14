@@ -44,18 +44,11 @@ public class LevelMenu : MonoBehaviour
         Debug.Log(SelectedIndex);
     }
 
+   
 
     private void UpgradeOrNew()
     {
-        exManager.SelectedIndex = SelectedIndex;
-        if (exManager.IsFree()) 
-        {
             OnAllButton(button, true);
-        }
-        else
-        {
-            upgradeButton?.SetActive(true);
-        }
     }
 
     private void OnAllButton(GameObject[] button, bool On)
@@ -92,8 +85,8 @@ public class LevelMenu : MonoBehaviour
         exManager.SelectedIndex = SelectedIndex;
         exManager.SetNemTurrel(2);
         Time.timeScale = 1f;
-        levelMenu.SetActive(false);
         OnAllButton(button, false);
+        levelMenu.SetActive(false);
     }
 
     public void UpgradeMain()

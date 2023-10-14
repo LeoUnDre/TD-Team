@@ -39,11 +39,7 @@ public class MeleeEnemy : Enemy, IDamageble
                 MaxHP += 10;
                 Damage += 5;
             }
-            if (player.GetComponent<ExManager>().isNewLevel)
-            {
-                MaxHP += 10;
-                Damage += 5;
-            }
+
         }
         else
         {
