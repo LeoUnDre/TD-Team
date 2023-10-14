@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7832871045799887249}
   - component: {fileID: -8101555626182076048}
   - component: {fileID: 2593192702000204091}
+  - component: {fileID: -5715345006394227478}
   m_Layer: 0
   m_Name: P_turret_laser
   m_TagString: Untagged
@@ -153,10 +154,29 @@ MonoBehaviour:
     type: 3}
   bulletSpawn: {fileID: 5320479560049841358}
   owner: {fileID: 0}
-  ownerSpawn: []
+  ownerSpawn: {fileID: 0}
   level: 0
+  LevelPrefab: []
+  numTurrel: 0
   target: {fileID: 0}
   damage: 0
+  LevelPrefabs: []
+--- !u!114 &-5715345006394227478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4846745369910157043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7c7e978d9a41ea49a9e9ef4467e4c0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objbullet: {fileID: 903032692478152822, guid: 8747734dab1ff344fab7be1e676e5858,
+    type: 3}
+  objclone: {fileID: 0}
+  power: 1000
 --- !u!1 &9083955847953374413
 GameObject:
   m_ObjectHideFlags: 0

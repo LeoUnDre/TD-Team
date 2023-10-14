@@ -12,7 +12,6 @@ public class Gun : MonoBehaviour
 
     private float shootCooldow;
     private float startShootCooldown = 2f;
-    private float shootCooldowTureel;
 
     public void Shoot(GameObject types, Transform bulletSpawner)
     {
@@ -34,15 +33,13 @@ public class Gun : MonoBehaviour
         }
         else if(types.GetComponent<Autoturell>() != null)
         {
-            if (shootCooldowTureel <= 0)
-            {
+            if(shootCooldow <= 0)
                 objbullet.GetComponent<Bullet>().damage = types.GetComponent<Autoturell>().damage;
                 objbullet.GetComponent<Bullet>().isEnemy = false;
                 objclone = Instantiate(objbullet, bulletSpawner.position, Quaternion.identity);
                 objclone.GetComponent<Rigidbody>().AddForce(bulletSpawner.transform.forward * power);
                 Destroy(objclone, 10);
-                shootCooldowTureel = startShootCooldown;
-            }
+                shootCooldow = startShootCooldown;
 
             shootCooldow -= Time.deltaTime;
         }

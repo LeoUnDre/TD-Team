@@ -58,15 +58,6 @@ public class MeleeEnemy : Enemy, IDamageble
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.GetComponent<Autoturell>() != null)
-        {
-            other.GetComponent<Autoturell>().target = this.gameObject;
-            Debug.Log("XYI");
-        }
-    }
-
 
     public override void Takedamage(int damage)
     {

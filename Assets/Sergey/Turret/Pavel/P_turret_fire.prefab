@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5647229150359449966}
   - component: {fileID: 8892664556729902221}
   - component: {fileID: -647547279428214608}
+  - component: {fileID: 8806836786331456465}
   m_Layer: 0
   m_Name: P_turret_fire
   m_TagString: Untagged
@@ -148,15 +149,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d91b6c0250d027f4d8530ffd9dc5b328, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gun: {fileID: 651690175393434185}
+  gun: {fileID: 8806836786331456465}
   bulletPrefab: {fileID: 903032692478152822, guid: 8747734dab1ff344fab7be1e676e5858,
     type: 3}
   bulletSpawn: {fileID: 6383582779804093555}
   owner: {fileID: 0}
-  ownerSpawn: []
+  ownerSpawn: {fileID: 0}
   level: 0
+  LevelPrefab: []
+  numTurrel: 0
   target: {fileID: 0}
   damage: 0
+  LevelPrefabs: []
+--- !u!114 &8806836786331456465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 651690175393434185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7c7e978d9a41ea49a9e9ef4467e4c0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objbullet: {fileID: 903032692478152822, guid: 8747734dab1ff344fab7be1e676e5858,
+    type: 3}
+  objclone: {fileID: 0}
+  power: 1000
 --- !u!1 &7595995187775383932
 GameObject:
   m_ObjectHideFlags: 0

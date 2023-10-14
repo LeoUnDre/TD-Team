@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Autoturell : MonoBehaviour
 {
-    [SerializeField] GameObject gun;
+    [SerializeField] Gun gun;
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform bulletSpawn;
     [SerializeField] public GameObject owner;
@@ -12,7 +12,6 @@ public class Autoturell : MonoBehaviour
     [SerializeField] private int level = 1;
     [SerializeField] public GameObject[] LevelPrefab;
     [SerializeField] public int numTurrel;
-    public GameObject target = null;
     public int damage;
 
     [SerializeField] public GameObject[] LevelPrefabs;
@@ -30,6 +29,7 @@ public class Autoturell : MonoBehaviour
         bulletSpawn.transform.rotation = this.transform.rotation;
         transform.position = ownerSpawn.transform.position;
         transform.rotation = ownerSpawn.transform.rotation;
+        gun = gameObject.GetComponent<Gun>();
     }
 
 
@@ -40,10 +40,7 @@ public class Autoturell : MonoBehaviour
     {
         transform.position = ownerSpawn.transform.position;
         transform.rotation = ownerSpawn.transform.rotation;
-        if (target != null)
-        {
-            gun.GetComponent<Gun>().Shoot(this.gameObject, bulletSpawn);
-        }
+        gun.Shoot(this.gameObject, bulletSpawn);
     }
 
     public void LevelUp()
