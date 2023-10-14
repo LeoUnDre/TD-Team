@@ -119,8 +119,7 @@ public class TowerControl : MonoBehaviour
 
     private void GameOver()
     {
-        Destroy(gameSpawn);
-        Destroy(gameObject);
+        Application.Quit();
     }
 
     private void OnDestroy()

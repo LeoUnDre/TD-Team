@@ -12,6 +12,10 @@ public class LevelMenu : MonoBehaviour
     [SerializeField] GameObject[] button;
     [SerializeField] GameObject upgradeButton;
     [SerializeField] ExManager exManager;
+    [SerializeField] public List<GameObject> TurrelPrefabs;
+    private Autoturell tOwner;
+    private Autoturell[] existTurrel = new Autoturell[4];
+    public Autoturell selectedTurret;
 
     private int SelectedIndex;
 
@@ -44,7 +48,62 @@ public class LevelMenu : MonoBehaviour
         Debug.Log(SelectedIndex);
     }
 
-   
+    public bool IsFree(List<GameObject> turrelPrefab, int selInd)
+    {
+        if (selInd <= 0)
+        {
+            return turrelPrefab[selInd].GetComponent<StandManager>().isFree;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void SetNemTurrel(int numTurrel, int selectedIndex, List<GameObject> turrelPrefabs)
+    {
+        if (selectedTurret == null)
+        {
+            switch (numTurrel)
+            {
+                case 0:
+                    AddNemTurrel(fireTurrel, numTurrel, selectedIndex, turrelPrefabs);
+                    break;
+                case 1:
+                    AddNemTurrel(lazerTurrel, numTurrel, selectedIndex, turrelPrefabs);
+                    break;
+                case 2:
+                    AddNemTurrel(MachineTurrel, numTurrel, selectedIndex, turrelPrefabs);
+                    break;
+            }
+
+        }
+    }
+
+    private void AddNemTurrel(GameObject[] prefab, int IdTurrel, int selectedIndex, List<GameObject> turrelPrefabs)
+    {
+        if (turrelPrefabs != null)
+        {
+            if (!IsFree(turrelPrefabs, selectedIndex))
+            {
+                GameObject turrell = turrelPrefabs[selectedIndex];
+                GameObject turrel = Instantiate(prefab[0], turrell.transform.position, Quaternion.identity);
+                tOwner = turrel.GetComponent<Autoturell>();
+                tOwner.LevelPrefabs = prefab;
+                tOwner.owner = this.gameObject;
+                tOwner.numTurrel = IdTurrel;
+                tOwner.ownerSpawn = turrell.gameObject;
+                turrell.GetComponent<StandManager>().isFree = true;
+                existTurrel[selectedIndex] = tOwner;
+                Time.timeScale = 1f;
+                gameObject.SetActive(false);
+            }
+            else
+            {
+                Debug.Log("This Dont Have a place");
+            }
+        }
+    }
 
     private void UpgradeOrNew()
     {
@@ -64,37 +123,31 @@ public class LevelMenu : MonoBehaviour
 
     public void SetFire()
     {
-        exManager.SelectedIndex = SelectedIndex;
-        exManager.SetNemTurrel(0);
-        Time.timeScale = 1f;
-        OnAllButton(button, false);
-        gameObject.SetActive(false);
+        SelectedIndex = 3;
+        SetNemTurrel(0,3,TurrelPrefabs);
     }
 
     public void SetLazer()
     {
-        exManager.SelectedIndex = SelectedIndex;
-        exManager.SetNemTurrel(1);
-        Time.timeScale = 1f;
-        OnAllButton(button, false);
-        levelMenu.SetActive(false);
+        SelectedIndex = 2;
+        SetNemTurrel(1,2,TurrelPrefabs);
     }
 
     public void SetMachineGun()
     {
-        exManager.SelectedIndex = SelectedIndex;
-        exManager.SetNemTurrel(2);
-        Time.timeScale = 1f;
-        OnAllButton(button, false);
-        levelMenu.SetActive(false);
+        SelectedIndex = 1;
+        SetNemTurrel(2,1,TurrelPrefabs);
+    }
+
+    public void SetMachineGun1()
+    {
+        SelectedIndex = 0;
+        SetNemTurrel(2,0,TurrelPrefabs);
     }
 
     public void UpgradeMain()
     {
-        Time.timeScale = 1f;
         exManager.UpgradeThisExistTurrel();
         upgradeButton.SetActive(false);
-        levelMenu.SetActive(false);
     }
-
 }

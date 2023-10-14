@@ -13,7 +13,7 @@ public class SpawnMobs : MonoBehaviour
     [SerializeField] GameObject playerTargetBoss;
     [SerializeField] GameObject gameOver;
 
-    private float timeSpawn = 1f;
+    private float timeSpawn = 3f;
 
     private float timer;
 
@@ -38,16 +38,9 @@ public class SpawnMobs : MonoBehaviour
                 Vector3 pos = prefabSpawn[UnityEngine.Random.Range(0, prefabSpawn.Length)].GetComponent<Transform>().position;
                 pos.x += Random.Range(3, 7);
                 pos.z += Random.Range(3, 7);
-            switch (playerTarget.GetComponent<ExManager>().Level)
-            {
-                case 1:
-                    Instantiate(prefabEnemy[0], pos, Quaternion.identity);
-                    break;
-                case > 2:
-                    Instantiate(prefabEnemy[UnityEngine.Random.Range(0, 1)], pos, Quaternion.identity);
-                    break;
-            }
-                count--;
+
+            Instantiate(prefabEnemy[UnityEngine.Random.Range(0, prefabEnemy.Length)], pos, Quaternion.identity);
+            count--;
             }
 
             else if(count == 0)
