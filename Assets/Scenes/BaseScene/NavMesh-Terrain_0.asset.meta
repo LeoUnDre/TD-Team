@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scenes/BaseScene/NavMesh-Terrain_0.asset.meta
 guid: eefc8b965b006694eb1cd39ee8861673
+========
+guid: ef0c9d803c1cf9349945684a89db4d72
+>>>>>>>> 5433266e7fcad72caf72ab899acd1b99194ff375:Assets/Scenes/BaseScene/NavMesh.asset.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 23800000

@@ -65,6 +65,8 @@ GameObject:
   - component: {fileID: 252399989029474078}
   - component: {fileID: 236144611824255758}
   - component: {fileID: -1003108986708553470}
+  - component: {fileID: -8135236138477637633}
+  - component: {fileID: -841605470754284785}
   m_Layer: 0
   m_Name: P_Turret_2
   m_TagString: Untagged
@@ -167,6 +169,48 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &-8135236138477637633
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8542300545472692824}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.011182309, y: 0.013265816, z: 0.013528906}
+  m_Center: {x: -0.00016151067, y: -0.0007767835, z: 0.006738035}
+--- !u!114 &-841605470754284785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8542300545472692824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d91b6c0250d027f4d8530ffd9dc5b328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gun: {fileID: 8542300545472692824}
+  bulletPrefab: {fileID: 903032692478152822, guid: 8747734dab1ff344fab7be1e676e5858,
+    type: 3}
+  bulletSpawn: {fileID: 90033244623643167}
+  owner: {fileID: 0}
+  ownerSpawn: []
+  level: 0
+  target: {fileID: 0}
+  damage: 0
 --- !u!1001 &863376274557020627
 PrefabInstance:
   m_ObjectHideFlags: 0

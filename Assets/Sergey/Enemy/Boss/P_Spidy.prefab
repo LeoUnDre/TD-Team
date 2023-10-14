@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2315426241344036511
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7734838558227878909}
+  m_Layer: 0
+  m_Name: BulletSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7734838558227878909
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2315426241344036511}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.7071068, y: -0.000000015454312, z: -0.000000015454312, w: 0.7071068}
+  m_LocalPosition: {x: -0.00044, y: -0.02146, z: 0.00603}
+  m_LocalScale: {x: 0.01, y: 0.009999997, z: 0.009999997}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 372161945482708516}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7664661667258742416
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,6 +41,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3184038727848426468}
   - component: {fileID: -4033152019957128778}
+  - component: {fileID: 2912884084630963997}
+  - component: {fileID: 3416806633666649638}
+  - component: {fileID: 4704890288089805248}
+  - component: {fileID: 6952630481542245277}
   m_Layer: 0
   m_Name: P_Spidy
   m_TagString: Untagged
@@ -55,6 +90,92 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!195 &2912884084630963997
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7664661667258742416}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &3416806633666649638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7664661667258742416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39db5428eab53834986ca3c3ddbac5e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSpawn: {fileID: 7734838558227878909}
+  gun: {fileID: 6894043172501155575}
+  player: {fileID: 2155126998443001424, guid: c1100f673376bf84e80cf90647a1fbc3, type: 3}
+  target: {fileID: 0}
+--- !u!54 &4704890288089805248
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7664661667258742416}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!135 &6952630481542245277
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7664661667258742416}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 3.79
+  m_Center: {x: 0, y: 3.75, z: 0.64}
 --- !u!1 &8769218404268276692
 GameObject:
   m_ObjectHideFlags: 0
@@ -4948,13 +5069,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -3356499726025798328, guid: 7cfdd87619faa2941a4976ade624a2ca,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7734838558227878909}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7cfdd87619faa2941a4976ade624a2ca,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 662796768193144316}
+    - targetCorrespondingSourceObject: {fileID: 859608791275038107, guid: 7cfdd87619faa2941a4976ade624a2ca,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4498545693519465168}
   m_SourcePrefab: {fileID: 100100000, guid: 7cfdd87619faa2941a4976ade624a2ca, type: 3}
+--- !u!4 &372161945482708516 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -3356499726025798328, guid: 7cfdd87619faa2941a4976ade624a2ca,
+    type: 3}
+  m_PrefabInstance: {fileID: 6071272418828290924}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6038138959549066375 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7cfdd87619faa2941a4976ade624a2ca,
@@ -4988,3 +5123,25 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &6894043172501155575 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 859608791275038107, guid: 7cfdd87619faa2941a4976ade624a2ca,
+    type: 3}
+  m_PrefabInstance: {fileID: 6071272418828290924}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4498545693519465168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6894043172501155575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7c7e978d9a41ea49a9e9ef4467e4c0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objbullet: {fileID: 903032692478152822, guid: 8747734dab1ff344fab7be1e676e5858,
+    type: 3}
+  objclone: {fileID: 0}
+  power: 1000
