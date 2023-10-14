@@ -38,10 +38,10 @@ public class SpawnMobs : MonoBehaviour
                 pos.z += Random.Range(3, 7);
             switch (playerTarget.GetComponent<ExManager>().Level)
             {
-                case < 5:
+                case 1:
                     Instantiate(prefabEnemy[0], pos, Quaternion.identity);
                     break;
-                case < 10:
+                case > 2:
                     Instantiate(prefabEnemy[UnityEngine.Random.Range(0, 1)], pos, Quaternion.identity);
                     break;
             }

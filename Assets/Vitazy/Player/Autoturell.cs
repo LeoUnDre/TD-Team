@@ -65,10 +65,10 @@ public class Autoturell : MonoBehaviour
             Autoturell newTurretComponent = newTurret.GetComponent<Autoturell>();
             newTurretComponent.owner = owner;
             newTurretComponent.ownerSpawn = ownerSpawn;
-            newTurretComponent.level = level + 1;
+            newTurretComponent.level += 1;
             newTurretComponent.LevelPrefabs = LevelPrefabs;
             SetSelectedTurret(newTurretComponent);
-            gameObject.SetActive(false);
+            this.gameObject.SetActive(false);
 
         }
     }
@@ -76,5 +76,6 @@ public class Autoturell : MonoBehaviour
     public void SetSelectedTurret(Autoturell turret)
     {
         owner.GetComponent<ExManager>().selectedTurret = turret;
+        Debug.Log(turret);
     }
 }

@@ -47,6 +47,16 @@ public class Gun : MonoBehaviour
 
             Debug.DrawRay(ray.origin, ray.direction * shootdistance, Color.blue, 1);
         }
+
+        else if (types.TryGetComponent<BossEnemy>(out BossEnemy bossEnemy)) 
+        {
+            objbullet.GetComponent<Bullet>().damage = types.GetComponent<BossEnemy>().Damage;
+            objbullet.GetComponent<Bullet>().isEnemy = true;
+            objclone = Instantiate(objbullet, bulletSpawner.position, Quaternion.identity);
+            objclone.GetComponent<Rigidbody>().AddForce(bulletSpawner.transform.forward * power);
+            Destroy(objclone, 10);
+            shootCooldow = startShootCooldown;
+        }
         else if (types.GetComponent<RangeEnemy>() != null)
         {
             if (shootCooldow <= 0)

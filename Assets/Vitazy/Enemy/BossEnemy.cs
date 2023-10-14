@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.GraphicsBuffer;
 
-public class RangeEnemy : MonoBehaviour, IDamageble
+public class BossEnemy : MonoBehaviour, IDamageble
 {
     [SerializeField] Transform bulletSpawn;
     [SerializeField] GameObject gun;
@@ -25,32 +25,27 @@ public class RangeEnemy : MonoBehaviour, IDamageble
 
     void Start()
     {
-        MaxHP = 100;
+        MaxHP = 300;
         HP = MaxHP;
 
-        Damage = 8;
-        
+        Damage = 12;
+
         m_navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
 
     public void SetExp()
     {
-        player.GetComponent<ExManager>().SetXp(xp: Exp);
+        throw new System.NotImplementedException();
     }
+
 
     void Update()
     {
 
-        if(HP <= 0)
+        if (HP <= 0)
         {
             Destroy(gameObject);
-        }
-
-        if (player.GetComponent<ExManager>().isNewLevel)
-        {
-            MaxHP += 10;
-            Damage += 5;
         }
 
         if (player != null)
@@ -58,13 +53,13 @@ public class RangeEnemy : MonoBehaviour, IDamageble
             m_navMeshAgent.SetDestination(player.transform.position);
             transform.LookAt(player.transform.position);
 
-            if(Vector3.Distance(transform.position, player.transform.position) < 20f)
+            if (Vector3.Distance(transform.position, player.transform.position) < 20f)
             {
                 m_navMeshAgent.Stop();
                 isAttackPoint = true;
             }
         }
-        else if(player == null)
+        else if (player == null)
         {
             Destroy(gameObject);
         }
@@ -82,7 +77,6 @@ public class RangeEnemy : MonoBehaviour, IDamageble
     {
         Destroy(gameObject);
     }
-
 
     public void Takedamage(int damage)
     {

@@ -19,7 +19,7 @@ public class MeleeEnemy : Enemy, IDamageble
         Exp = 5;
         MaxHP = 60;
         HP = MaxHP;
-        Damage = 2;
+        Damage = 5;
         m_navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
@@ -38,8 +38,11 @@ public class MeleeEnemy : Enemy, IDamageble
             {
                 MaxHP += 10;
                 Damage += 5;
-                player.GetComponent<ExManager>().isNewLevel = false;
-                Debug.Log("Враги ахуели");
+            }
+            if (player.GetComponent<ExManager>().isNewLevel)
+            {
+                MaxHP += 10;
+                Damage += 5;
             }
         }
         else
@@ -67,6 +70,7 @@ public class MeleeEnemy : Enemy, IDamageble
             Debug.Log("XYI");
         }
     }
+
 
     public override void Takedamage(int damage)
     {

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Sockets;
+using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -14,13 +16,14 @@ public class ExManager : MonoBehaviour
     [SerializeField] GameObject[] MachinePrefabs;
     [SerializeField] GameObject platform;
     [SerializeField] List<GameObject> TurrelPrefabs;
+    public int SelectedIndex;
     private Autoturell tOwner;
     private int Xp;
     private int NextLevelXp;
     public int Level;
     public bool isNewLevel = false;
     private bool isFull;
-    private List<GameObject> existTurrel = new List<GameObject>();
+    private Autoturell[] existTurrel = new Autoturell[4];
     public Autoturell selectedTurret;
 
 
@@ -34,25 +37,6 @@ public class ExManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyUp(KeyCode.W))
-        {
-
-            SetNemTurrel(UnityEngine.Random.Range(0, 2));
-        }
-        if (Input.GetKeyUp(KeyCode.S))
-        {
-            if (existTurrel != null)
-            {
-                if (selectedTurret != null)
-                {
-                    UpgradeThisExistTurrel();
-                }
-            }
-            else
-            {
-                Debug.Log("Лох");
-            }
-        }
 
         if (Xp == NextLevelXp)
         {
@@ -65,6 +49,13 @@ public class ExManager : MonoBehaviour
 
     private void SetNewLevel()
     {
+        foreach(Autoturell t in existTurrel) 
+        {
+            if(t.TryGetComponent<Autoturell>(out Autoturell at))
+            {
+                at.damage += 10;
+            }
+        }
         Level += 1;
         NextLevelXp += 100;
         Xp = 0;
@@ -78,7 +69,6 @@ public class ExManager : MonoBehaviour
     private void OpenLevelMenu()
     {
         levelMenu.SetActive(true);
-        levelMenu.GetComponent<LevelMenu>();
         Time.timeScale = 0;
     }
 
@@ -102,47 +92,53 @@ public class ExManager : MonoBehaviour
         }
     }
 
-private void AddNemTurrel(GameObject[] prefab, int IdTurrel)
+    private void AddNemTurrel(GameObject[] prefab, int IdTurrel)
     {
-        if(TurrelPrefabs != null)
+        if (TurrelPrefabs != null)
         {
-            foreach(var t in TurrelPrefabs)
+            if (!IsFree())
             {
-                if (!t.GetComponent<StandManager>().isFree)
-                {
-                    GameObject turrel = Instantiate(prefab[0], t.transform.position, Quaternion.identity);
-                    tOwner = turrel.GetComponent<Autoturell>();
-                    tOwner.LevelPrefabs = prefab;
-                    tOwner.owner = this.gameObject;
-                    tOwner.numTurrel = IdTurrel;
-                    tOwner.ownerSpawn = t.gameObject;
-                    tOwner.SetSelectedTurret(tOwner);
-                    t.GetComponent<StandManager>().isFree = true;
-                    existTurrel.Add(turrel);
-                    break;
-                }
+                GameObject turrell = TurrelPrefabs[SelectedIndex];
+                GameObject turrel = Instantiate(prefab[0], turrell.transform.position, Quaternion.identity);
+                tOwner = turrel.GetComponent<Autoturell>();
+                tOwner.LevelPrefabs = prefab;
+                tOwner.owner = this.gameObject;
+                tOwner.numTurrel = IdTurrel;
+                tOwner.ownerSpawn = turrell.gameObject;
+                turrell.GetComponent<StandManager>().isFree = true;
+                existTurrel[SelectedIndex] = tOwner;
             }
+            else
+            {
+                Debug.Log("This Dont Have a place");
+            }
+        }
+    }
+
+    public bool IsFree()
+    {
+        if (SelectedIndex <= 0)
+        {
+            return TurrelPrefabs[SelectedIndex].GetComponent<StandManager>().isFree;
         }
         else
         {
-            Debug.Log("This dosnt exist");
+            return false;
         }
-    }
+        }
 
     public void UpgradeThisExistTurrel()
     {
         if (selectedTurret != null)
         {
-            // Проверяем, что у турели есть доступные уровни для апгрейда
-            if (selectedTurret.Level < selectedTurret.LevelPrefabs.Length - 1)
+            if (selectedTurret.Level < selectedTurret.LevelPrefabs.Length)
             {
                 // Улучшаем турель на один уровень
                 selectedTurret.LevelUp();
             }
             else
             {
-                // Если у турели больше нет уровней, выведите сообщение или выполните другие действия
-                Debug.Log("Турель достигла максимального уровня.");
+                Debug.Log("TurrelHaveMaxLevel");
             }
         }
     }
