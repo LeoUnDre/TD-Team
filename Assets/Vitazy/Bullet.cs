@@ -27,16 +27,21 @@ public class Bullet : MonoBehaviour
     {
         if (collision.collider.gameObject.GetComponent<TowerControl>() != null && isEnemy)
         {
-            int damage = GetComponent<MeleeEnemy>().Damage;
             collision.collider.gameObject.GetComponent<TowerControl>().Takedamage(damage);
             Destroy(this.gameObject);
         }
-        else if ((collision.collider.gameObject.GetComponent<RangeEnemy>() != null
-            || collision.collider.gameObject.GetComponent<MeleeEnemy>() != null)
-            && !isEnemy)
+        else if (!isEnemy)
         {
-            collision.collider.gameObject.GetComponent<MeleeEnemy>().Takedamage(damage);
-            Destroy(this.gameObject);
+            if (collision.collider.gameObject.TryGetComponent<RangeEnemy>(out RangeEnemy enemy))
+            {
+                enemy.Takedamage(damage);
+                Destroy(this.gameObject);
+            }
+            else if(collision.collider.TryGetComponent<MeleeEnemy>(out MeleeEnemy meleeEnemy))
+            {
+                meleeEnemy.Takedamage(damage);
+                Destroy (this.gameObject);
+            }
         }
     }
 }

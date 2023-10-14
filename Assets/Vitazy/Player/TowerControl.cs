@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class TowerControl : MonoBehaviour
 {
+    [SerializeField] Transform baseTurrel;
     [SerializeField] GameObject gun;
     [SerializeField] Transform bulletSpawn;
     [SerializeField] GameObject gameSpawn;
@@ -93,19 +94,25 @@ public class TowerControl : MonoBehaviour
         {
             lookPos = hit.point;
         }
-        Vector3 lookDir = lookPos - gun.transform.position;
+        Vector3 lookDir = lookPos - baseTurrel.transform.position;
         lookDir.y = 0;
 
 
         Quaternion targetRotation = Quaternion.LookRotation(lookDir);
         targetRotation *= Quaternion.Euler(-90f, -90f, 0f);
-        gun.transform.rotation = Quaternion.Lerp(gun.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        baseTurrel.transform.rotation = Quaternion.Lerp(baseTurrel.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        gun.transform.rotation = baseTurrel.transform.rotation;
     }
 
     private void GameOver()
     {
         Destroy(gameSpawn);
         Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        Time.timeScale = 0;
     }
 
     public void Takedamage(int damage)

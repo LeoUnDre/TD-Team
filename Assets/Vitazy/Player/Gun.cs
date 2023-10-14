@@ -51,6 +51,7 @@ public class Gun : MonoBehaviour
         {
             if (shootCooldow <= 0)
             {
+                objbullet.GetComponent<Bullet>().damage = types.GetComponent<RangeEnemy>().Damage;
                 objbullet.GetComponent<Bullet>().isEnemy = true;
                 objclone = Instantiate(objbullet, bulletSpawner.position, Quaternion.identity);
                 objclone.GetComponent<Rigidbody>().AddForce(bulletSpawner.transform.forward * power);

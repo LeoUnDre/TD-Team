@@ -9,6 +9,8 @@ public class SpawnMobs : MonoBehaviour
     [SerializeField] GameObject[] prefabEnemy;
     [SerializeField] GameObject[] prefabSpawn;
     [SerializeField] GameObject playerTarget;
+    [SerializeField] GameObject prefabBoss;
+    [SerializeField] GameObject playerTargetBoss;
 
     private float timeSpawn = 1f;
 
@@ -17,6 +19,8 @@ public class SpawnMobs : MonoBehaviour
     private void Start()
     {
         timer = timeSpawn;
+        prefabBoss.GetComponent<RangeEnemy>().target = playerTargetBoss;
+        prefabBoss.GetComponent<RangeEnemy>().player = playerTarget;
         for (int i = 0; i < prefabEnemy.Length; i++)
         {
             prefabEnemy[i].GetComponent<Enemy>().player = playerTarget;
@@ -32,18 +36,24 @@ public class SpawnMobs : MonoBehaviour
                 Vector3 pos = prefabSpawn[UnityEngine.Random.Range(0, prefabSpawn.Length)].GetComponent<Transform>().position;
                 pos.x += Random.Range(3, 7);
                 pos.z += Random.Range(3, 7);
-                switch (playerTarget.GetComponent<ExManager>().Level)
-                {
-                    case <5:
-                        Instantiate(prefabEnemy[0], pos, Quaternion.identity);
-                        break;
-                    case <10:
-                        Instantiate(prefabEnemy[UnityEngine.Random.Range(0, 1)], pos, Quaternion.identity);
-                        break;
-
+            switch (playerTarget.GetComponent<ExManager>().Level)
+            {
+                case < 5:
+                    Instantiate(prefabEnemy[0], pos, Quaternion.identity);
+                    break;
+                case < 10:
+                    Instantiate(prefabEnemy[UnityEngine.Random.Range(0, 1)], pos, Quaternion.identity);
+                    break;
             }
                 count--;
+            }
+
+            else if(count == 0)
+            {
+                Vector3 pos = prefabSpawn[0].GetComponent<Transform>().position;
+                Instantiate(prefabBoss, pos, Quaternion.identity);
+                Destroy(this.gameObject);
+            }
         }
-    }
 }
 

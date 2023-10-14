@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class GameOverManager : MonoBehaviour
 {
-    [SerializeField] GameObject[] enemyList;
 
-    public void GameOver() { 
+
+    public void GameOver()
+    {
+        if (10 == 10) ;
+        {
+        }
     }
 }

@@ -7,18 +7,29 @@ public class Autoturell : MonoBehaviour
     [SerializeField] GameObject gun;
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform bulletSpawn;
-    [SerializeField] GameObject owner;
-    [SerializeField] GameObject[] ownerSpawn;
-
+    [SerializeField] public GameObject owner;
+    [SerializeField] public GameObject ownerSpawn;
+    [SerializeField] private int level = 1;
+    [SerializeField] public GameObject[] LevelPrefab;
+    [SerializeField] public int numTurrel;
     public GameObject target = null;
     public int damage;
+
+    [SerializeField] public GameObject[] LevelPrefabs;
+
+
+    public int Level
+    {
+        get { return level; }
+    }
+
 
     private void Start()
     {
         damage = 25;
-        this.transform.position = ownerSpawn[0].transform.position;
-        this.transform.rotation = ownerSpawn[0].transform.rotation;
         bulletSpawn.transform.rotation = this.transform.rotation;
+        transform.position = ownerSpawn.transform.position;
+        transform.rotation = ownerSpawn.transform.rotation;
     }
 
 
@@ -27,10 +38,9 @@ public class Autoturell : MonoBehaviour
 
     private void Update()
     {
-        transform.position = ownerSpawn[0].transform.position; 
-        this.transform.rotation = ownerSpawn[0].transform.rotation;
-        bulletSpawn.transform.rotation = this.transform.rotation;
-        if (target != null) 
+        transform.position = ownerSpawn.transform.position;
+        transform.rotation = ownerSpawn.transform.rotation;
+        if (target != null)
         {
             if (target.GetComponent<MeleeEnemy>() != null)
             {
@@ -40,10 +50,31 @@ public class Autoturell : MonoBehaviour
 
                 Debug.Log(lookDir);
             }
-            else if(target.GetComponent<RangeEnemy>() != null)
+            else if (target.GetComponent<RangeEnemy>() != null)
             {
 
             }
         }
+    }
+
+    public void LevelUp()
+    {
+        if (level < LevelPrefabs.Length)
+        {
+            GameObject newTurret = Instantiate(LevelPrefabs[level + 1], transform.position, transform.rotation);
+            Autoturell newTurretComponent = newTurret.GetComponent<Autoturell>();
+            newTurretComponent.owner = owner;
+            newTurretComponent.ownerSpawn = ownerSpawn;
+            newTurretComponent.level = level + 1;
+            newTurretComponent.LevelPrefabs = LevelPrefabs;
+            SetSelectedTurret(newTurretComponent);
+            gameObject.SetActive(false);
+
+        }
+    }
+
+    public void SetSelectedTurret(Autoturell turret)
+    {
+        owner.GetComponent<ExManager>().selectedTurret = turret;
     }
 }

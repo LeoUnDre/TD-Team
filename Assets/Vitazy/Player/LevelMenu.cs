@@ -5,6 +5,9 @@ using UnityEngine;
 public class LevelMenu : MonoBehaviour
 {
     [SerializeField] GameObject levelMenu;
+    [SerializeField] GameObject[] fireTurrel;
+    [SerializeField] GameObject[] lazerTurrel;
+    [SerializeField] GameObject[] MachineTurrel;
 
 
     private void SetFire()

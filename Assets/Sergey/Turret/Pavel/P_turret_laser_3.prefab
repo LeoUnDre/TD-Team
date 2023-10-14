@@ -66,6 +66,7 @@ GameObject:
   - component: {fileID: 3587779948707272748}
   - component: {fileID: 2695069069072475618}
   - component: {fileID: 4218324616509154733}
+  - component: {fileID: 1694178564496607249}
   m_Layer: 0
   m_Name: P_turret_laser_3
   m_TagString: Untagged
@@ -155,7 +156,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -188,6 +189,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1694178564496607249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8459050753842357959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d91b6c0250d027f4d8530ffd9dc5b328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gun: {fileID: 8459050753842357959}
+  bulletPrefab: {fileID: 903032692478152822, guid: 8747734dab1ff344fab7be1e676e5858,
+    type: 3}
+  bulletSpawn: {fileID: 4702794533015135601}
+  owner: {fileID: 0}
+  ownerSpawn: []
+  level: 0
+  target: {fileID: 0}
+  damage: 0
 --- !u!1001 &3476903282369628868
 PrefabInstance:
   m_ObjectHideFlags: 0

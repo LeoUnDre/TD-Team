@@ -66,6 +66,7 @@ GameObject:
   - component: {fileID: 2419030516053243809}
   - component: {fileID: 4073502118643985239}
   - component: {fileID: 234141982376364075}
+  - component: {fileID: -4196219640565178558}
   m_Layer: 0
   m_Name: P_turret_fire_3
   m_TagString: Untagged
@@ -155,7 +156,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -188,6 +189,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-4196219640565178558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7080010995820823518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d91b6c0250d027f4d8530ffd9dc5b328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gun: {fileID: 7080010995820823518}
+  bulletPrefab: {fileID: 6116013256812280966}
+  bulletSpawn: {fileID: 2897760945353759623}
+  owner: {fileID: 0}
+  ownerSpawn: []
+  level: 0
+  target: {fileID: 0}
+  damage: 0
 --- !u!1001 &565126596381350621
 PrefabInstance:
   m_ObjectHideFlags: 0
