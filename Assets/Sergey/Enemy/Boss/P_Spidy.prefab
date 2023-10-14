@@ -9839,9 +9839,9 @@ GameObject:
   - component: {fileID: 3184038727848426468}
   - component: {fileID: -4033152019957128778}
   - component: {fileID: 2912884084630963997}
-  - component: {fileID: 3416806633666649638}
   - component: {fileID: 4704890288089805248}
   - component: {fileID: 6952630481542245277}
+  - component: {fileID: -4485884668896888427}
   m_Layer: 0
   m_Name: P_Spidy
   m_TagString: Untagged
@@ -9909,22 +9909,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &3416806633666649638
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7664661667258742416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39db5428eab53834986ca3c3ddbac5e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletSpawn: {fileID: 7734838558227878909}
-  gun: {fileID: 6894043172501155575}
-  player: {fileID: 2155126998443001424, guid: c1100f673376bf84e80cf90647a1fbc3, type: 3}
-  target: {fileID: 0}
 --- !u!54 &4704890288089805248
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9973,6 +9957,22 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 3.79
   m_Center: {x: 0, y: 3.75, z: 0.64}
+--- !u!114 &-4485884668896888427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7664661667258742416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4815b534afd12ea44ab0cc91f5bc4b44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSpawn: {fileID: 7734838558227878909}
+  gun: {fileID: 6894043172501155575}
+  player: {fileID: 0}
+  target: {fileID: 0}
 --- !u!1 &8769218404268276692
 GameObject:
   m_ObjectHideFlags: 0

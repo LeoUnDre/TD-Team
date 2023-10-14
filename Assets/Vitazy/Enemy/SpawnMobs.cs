@@ -11,6 +11,7 @@ public class SpawnMobs : MonoBehaviour
     [SerializeField] GameObject playerTarget;
     [SerializeField] GameObject prefabBoss;
     [SerializeField] GameObject playerTargetBoss;
+    [SerializeField] GameObject gameOver;
 
     private float timeSpawn = 1f;
 
@@ -19,8 +20,9 @@ public class SpawnMobs : MonoBehaviour
     private void Start()
     {
         timer = timeSpawn;
-        prefabBoss.GetComponent<RangeEnemy>().target = playerTargetBoss;
-        prefabBoss.GetComponent<RangeEnemy>().player = playerTarget;
+        prefabBoss.GetComponent<BossEnemy>().target = playerTargetBoss;
+        prefabBoss.GetComponent<BossEnemy>().player = playerTarget;
+        prefabBoss.GetComponent<BossEnemy>().GameOver = gameOver;
         for (int i = 0; i < prefabEnemy.Length; i++)
         {
             prefabEnemy[i].GetComponent<Enemy>().player = playerTarget;

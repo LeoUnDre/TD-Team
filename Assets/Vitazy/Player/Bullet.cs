@@ -42,6 +42,10 @@ public class Bullet : MonoBehaviour
                 meleeEnemy.Takedamage(damage);
                 Destroy (this.gameObject);
             }
+            else if (collision.collider.GetComponent<BossEnemy>() != null)
+            {
+                collision.collider.GetComponent<BossEnemy>().Takedamage(damage);
+            }
         }
     }
 }

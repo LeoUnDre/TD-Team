@@ -10,6 +10,7 @@ public class BossEnemy : MonoBehaviour, IDamageble
     [SerializeField] GameObject gun;
     [SerializeField] public GameObject player;
     [SerializeField] public GameObject target;
+    [SerializeField] public GameObject GameOver;
 
 
     private bool isAttackPoint;
@@ -45,6 +46,8 @@ public class BossEnemy : MonoBehaviour, IDamageble
 
         if (HP <= 0)
         {
+            GameOver.SetActive(true);
+            Time.timeScale = 0;
             Destroy(gameObject);
         }
 
@@ -73,10 +76,8 @@ public class BossEnemy : MonoBehaviour, IDamageble
         }
     }
 
-    private void OnDestroy()
-    {
-        Destroy(gameObject);
-    }
+
+
 
     public void Takedamage(int damage)
     {

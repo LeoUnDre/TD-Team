@@ -8,6 +8,7 @@ public class TowerControl : MonoBehaviour
     [SerializeField] Transform bulletSpawn;
     [SerializeField] GameObject gameSpawn;
     [SerializeField] GameObject platform;
+    [SerializeField] GameObject pauseMenu;
     [SerializeField] public GameObject[] turrelSpawn;
     private Camera _cam;
     private float rotationSpeed = 10.0f;
@@ -59,6 +60,18 @@ public class TowerControl : MonoBehaviour
             gun.GetComponent<Gun>().Shoot(this.gameObject, bulletSpawn);
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape)){
+            if (!pauseMenu.active)
+            {
+                pauseMenu.SetActive(true);
+                Time.timeScale = 0;
+            }
+            else
+            {
+                pauseMenu.SetActive(false);
+                Time.timeScale = 1.0f;
+            }
+        }
 
         if (HP <= 0)
         {
