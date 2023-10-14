@@ -58,8 +58,6 @@ public class TowerControl : MonoBehaviour
         List<Enemy> enemiesList = new List<Enemy>(FindObjectsOfType<Enemy>());
         Enemy[] enemiesArray = enemiesList.ToArray();
 
-        Destroy(gameSpawn);
-        Destroy(gameObject);
     }
 
     public void Takedamage()
