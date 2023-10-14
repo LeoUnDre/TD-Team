@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,19 +6,20 @@ using UnityEngine.AI;
 
 public class MeleeEnemy : Enemy, IDamageble
 {
-    [SerializeField] public GameObject player;
-    private float speed = 5.0f;
     NavMeshAgent m_navMeshAgent;
 
     public int HP { get; set; }
     public int MaxHP { get; set; }
     public int Damage { get; set; }
 
+    public int Exp { get; set; }
+
     void Start()
     {
-        MaxHP = 100;
+        Exp = 5;
+        MaxHP = 60;
         HP = MaxHP;
-        Damage = 50;
+        Damage = 2;
         m_navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
@@ -27,12 +29,20 @@ public class MeleeEnemy : Enemy, IDamageble
         if (player != null)
         {
             m_navMeshAgent.SetDestination(player.transform.position);
-            if (HP == 0)
+            if (HP <= 0)
             {
+                SetExp();
                 Destroy(this.gameObject);
             }
+            if (player.GetComponent<ExManager>().isNewLevel)
+            {
+                MaxHP += 10;
+                Damage += 5;
+                player.GetComponent<ExManager>().isNewLevel = false;
+                Debug.Log("Враги ахуели");
+            }
         }
-        else if(player == null)
+        else
         {
             Destroy(this.gameObject);
         }
@@ -41,19 +51,32 @@ public class MeleeEnemy : Enemy, IDamageble
     private void OnCollisionEnter(Collision collision)
     {
         TowerControl tw = collision.collider.GetComponent<TowerControl>();
-        if(tw != null)
+        if (tw != null)
         {
-            tw.Takedamage();
+            tw.Takedamage(Damage);
+
             Destroy(this.gameObject);
         }
     }
 
-    public override void Takedamage()
+    private void OnTriggerEnter(Collider other)
     {
-        HP -= Damage;
-        if(HP == 0)
+        if(other.GetComponent<Autoturell>() != null)
         {
-            Destroy(this.gameObject);
+            other.GetComponent<Autoturell>().target = this.gameObject;
+            Debug.Log("XYI");
         }
+    }
+
+    public override void Takedamage(int damage)
+    {
+        HP -= damage;
+        Debug.Log(HP);
+        Debug.Log(damage);
+    }
+
+    public void SetExp()
+    {
+        player.GetComponent<ExManager>().SetXp(xp: Exp);
     }
 }

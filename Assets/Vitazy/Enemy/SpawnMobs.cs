@@ -26,13 +26,22 @@ public class SpawnMobs : MonoBehaviour
     private void Update()
     {
         timer -= Time.deltaTime;
-        if (timer < 0 && count != 0)
+            if (timer < 0 && count != 0)
             {
                 timer = timeSpawn;
                 Vector3 pos = prefabSpawn[UnityEngine.Random.Range(0, prefabSpawn.Length)].GetComponent<Transform>().position;
                 pos.x += Random.Range(3, 7);
                 pos.z += Random.Range(3, 7);
-                Instantiate(prefabEnemy[UnityEngine.Random.Range(0, prefabEnemy.Length - 1)], pos, Quaternion.identity);
+                switch (playerTarget.GetComponent<ExManager>().Level)
+                {
+                    case <5:
+                        Instantiate(prefabEnemy[0], pos, Quaternion.identity);
+                        break;
+                    case <10:
+                        Instantiate(prefabEnemy[UnityEngine.Random.Range(0, 1)], pos, Quaternion.identity);
+                        break;
+
+            }
                 count--;
         }
     }
