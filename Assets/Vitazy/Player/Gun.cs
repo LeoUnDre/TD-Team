@@ -33,14 +33,15 @@ public class Gun : MonoBehaviour
         }
         else if(types.GetComponent<Autoturell>() != null)
         {
-            if(shootCooldow <= 0)
+            if (shootCooldow <= 0)
+            {
                 objbullet.GetComponent<Bullet>().damage = types.GetComponent<Autoturell>().damage;
                 objbullet.GetComponent<Bullet>().isEnemy = false;
                 objclone = Instantiate(objbullet, bulletSpawner.position, Quaternion.identity);
                 objclone.GetComponent<Rigidbody>().AddForce(bulletSpawner.transform.forward * power);
                 Destroy(objclone, 10);
                 shootCooldow = startShootCooldown;
-
+            }
             shootCooldow -= Time.deltaTime;
         }
 
