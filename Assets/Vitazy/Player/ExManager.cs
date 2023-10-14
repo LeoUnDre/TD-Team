@@ -44,11 +44,6 @@ public class ExManager : MonoBehaviour
             Debug.Log("New Level" + Level);
             Debug.Log(this.GetComponent<TowerControl>().damage);
         }
-
-        if (isNewLevel)
-        {
-            OpenLevelMenu();
-        };
     }
 
 

@@ -11,8 +11,6 @@ public class Gun : MonoBehaviour
     public int power = 1000;
 
     private float shootCooldow;
-    private float bossCooldown;
-    private float enemyCooldown;
     private float startShootCooldown = 2f;
 
     public void Shoot(GameObject types, Transform bulletSpawner)
@@ -47,16 +45,16 @@ public class Gun : MonoBehaviour
             shootCooldow -= Time.deltaTime;
         }
 
-        else if (types.GetComponent<BossEnemy>()) 
+        else if (types.TryGetComponent<BossEnemy>(out BossEnemy bossEnemy)) 
         {
-            if (bossCooldown <= 0)
+            if (shootCooldow <= 0)
             {
-                objbullet.GetComponent<Bullet>().damage = types.GetComponent<BossEnemy>().Damage;
+                objbullet.GetComponent<Bullet>().damage = types.GetComponent<RangeEnemy>().Damage;
                 objbullet.GetComponent<Bullet>().isEnemy = true;
                 objclone = Instantiate(objbullet, bulletSpawner.position, Quaternion.identity);
                 objclone.GetComponent<Rigidbody>().AddForce(bulletSpawner.transform.forward * power);
                 Destroy(objclone, 10);
-                bossCooldown = startShootCooldown;
+                shootCooldow = startShootCooldown;
             }
         }
         else if (types.GetComponent<RangeEnemy>() != null)
@@ -68,10 +66,10 @@ public class Gun : MonoBehaviour
                 objclone = Instantiate(objbullet, bulletSpawner.position, Quaternion.identity);
                 objclone.GetComponent<Rigidbody>().AddForce(bulletSpawner.transform.forward * power);
                 Destroy(objclone, 10);
-                enemyCooldown = startShootCooldown;
+                shootCooldow = startShootCooldown;
             }
 
-            enemyCooldown -= Time.deltaTime;
+            shootCooldow -= Time.deltaTime;
         }
 
 
