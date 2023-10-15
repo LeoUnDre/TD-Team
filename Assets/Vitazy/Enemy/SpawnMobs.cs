@@ -11,14 +11,16 @@ public class SpawnMobs : MonoBehaviour
     [SerializeField] GameObject playerTarget;
     [SerializeField] GameObject prefabBoss;
     [SerializeField] GameObject playerTargetBoss;
+    [SerializeField] GameObject objectWin;
 
-    private float timeSpawn = 3f;
+    private float timeSpawn = 1f; //время спавна мобов
 
     private float timer;
 
     private void Start()
     {
         timer = timeSpawn;
+        prefabBoss.GetComponent<RangeEnemy>().objectWin = objectWin;
         prefabBoss.GetComponent<RangeEnemy>().target = playerTargetBoss;
         prefabBoss.GetComponent<RangeEnemy>().player = playerTarget;
         for (int i = 0; i < prefabEnemy.Length; i++)
@@ -43,7 +45,7 @@ public class SpawnMobs : MonoBehaviour
 
             else if(count == 0)
             {
-                Vector3 pos = prefabSpawn[0].GetComponent<Transform>().position;
+                Vector3 pos = prefabSpawn[2].GetComponent<Transform>().position;
                 Instantiate(prefabBoss, pos, Quaternion.identity);
                 Destroy(this.gameObject);
             }

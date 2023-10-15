@@ -10,7 +10,7 @@ public class LevelMenu : MonoBehaviour
     [SerializeField] GameObject[] fireTurrel;
     [SerializeField] GameObject[] lazerTurrel;
     [SerializeField] GameObject[] machineTurrel;
-    [SerializeField] GameObject newMenuButton;
+    [SerializeField] GameObject[] menuButton;
     [SerializeField] GameObject upgradeButton;
     [SerializeField] ExManager exManager;
     [SerializeField] public List<GameObject> TurrelPrefabs;
@@ -25,7 +25,7 @@ public class LevelMenu : MonoBehaviour
     public void SetFirsIndexGun()
     {
         SelectedIndex = 0;
-        UpgradeOrNew(isTurrelSet[SelectedIndex]);
+        UpgradeOrNew(isTurrelSet[SelectedIndex], SelectedIndex);
         Debug.Log(SelectedIndex);
     }
 
@@ -33,40 +33,67 @@ public class LevelMenu : MonoBehaviour
     {
 
         SelectedIndex = 1;
-        UpgradeOrNew(isTurrelSet[SelectedIndex]);
+        UpgradeOrNew(isTurrelSet[SelectedIndex], SelectedIndex);
         Debug.Log(SelectedIndex);
     }
 
     public void SetThirdIndexGun()
     {
         SelectedIndex = 2;
-        UpgradeOrNew(isTurrelSet[SelectedIndex]);
+        UpgradeOrNew(isTurrelSet[SelectedIndex], SelectedIndex);
         Debug.Log(SelectedIndex);
     }
 
     public void SetFourIndexGun()
     {
         SelectedIndex = 3;
-        UpgradeOrNew(isTurrelSet[SelectedIndex]);
+        UpgradeOrNew(isTurrelSet[SelectedIndex], SelectedIndex);
         Debug.Log(SelectedIndex);
     }
 
-    private void UpgradeOrNew(bool isTurrelExist)
+    private void UpgradeOrNew(bool isTurrelExist, int selectedId)
     {
-        OnAllButton(isTurrelExist);
+        OnAllButton(isTurrelExist, selectedId);
     }
 
-    private void OnAllButton(bool On)
+    private void OnArrayButton(int idButton)
     {
-        if (On)
+        for (int i = 0; i < menuButton.Length; i++)
         {
-            newMenuButton.SetActive(false);
-            upgradeButton.SetActive(true);
+            if (i == idButton)
+            {
+                menuButton[i].SetActive(true);
+            }
+            else
+                menuButton[i].SetActive(false);
+        }
+    }
+
+    private void OnAllButton(bool On, int idTurrel)
+    {
+        if (!On)
+        {
+            switch (idTurrel)
+            {
+                case 0:
+                case 1:
+                    OnArrayButton(0);
+                    break;
+                case 2:
+                    OnArrayButton(1);
+                    break;
+                case 3:
+                    OnArrayButton(2);
+                    break;
+            }
         }
         else
         {
-            upgradeButton.SetActive(false);
-            newMenuButton.SetActive(true);
+            foreach (var but in menuButton)
+            {
+                but.SetActive(false);
+            }
+            upgradeButton.SetActive(true);
         }
     }
 
@@ -77,22 +104,18 @@ public class LevelMenu : MonoBehaviour
             case 0:
                 exManager.SetNewTurrel(fireTurrel, 0, SelectedIndex, TurrelPrefabs);
                 isTurrelSet[SelectedIndex] = true;
-                newMenuButton.SetActive(false);
                 break;
             case 1:
                 exManager.SetNewTurrel(lazerTurrel, 1, SelectedIndex, TurrelPrefabs);
                 isTurrelSet[SelectedIndex] = true;
-                newMenuButton.SetActive(false);
                 break;
             case 2:
                 exManager.SetNewTurrel(machineTurrel, 2, SelectedIndex, TurrelPrefabs);
                 isTurrelSet[SelectedIndex] = true;
-                newMenuButton.SetActive(false);
                 break;
             case 3:
                 exManager.UpgradeThisExistTurrel(SelectedIndex);
                 isTurrelSet[SelectedIndex] = true;
-                newMenuButton.SetActive(false);
                 break;
         }
     }

@@ -155,10 +155,10 @@ MonoBehaviour:
   bulletSpawn: {fileID: 7899785033569390129}
   owner: {fileID: 0}
   ownerSpawn: {fileID: 0}
-  level: 0
   LevelPrefab: []
   numTurrel: 0
   damage: 0
+  level: 0
   LevelPrefabs: []
 --- !u!114 &3609799858553903632
 MonoBehaviour:
@@ -200,13 +200,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7332846177578461283}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0007831905, y: -0.0098301135, z: 0.008950255}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0.0007831905, y: -0.01348, z: 0.00895}
   m_LocalScale: {x: 0.005298991, y: 0.0052989903, z: 0.0052989903}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7414821308722139776}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1001 &54778253564752931
 PrefabInstance:
   m_ObjectHideFlags: 0

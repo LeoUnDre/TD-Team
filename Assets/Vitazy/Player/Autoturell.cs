@@ -21,7 +21,6 @@ public class Autoturell : MonoBehaviour
     {
         level = 1;
         damage = 25;
-        bulletSpawn.transform.rotation = this.transform.rotation;
         transform.position = ownerSpawn.transform.position;
         transform.rotation = ownerSpawn.transform.rotation;
         gun = gameObject.GetComponent<Gun>();

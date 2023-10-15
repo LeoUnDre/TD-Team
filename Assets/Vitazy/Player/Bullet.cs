@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    [SerializeField] public ParticleSystem hitParticle;
     public bool isEnemy = false;
     public int damage = 0;
     private void OnTriggerEnter(Collider other)
@@ -15,6 +16,7 @@ public class Bullet : MonoBehaviour
         {
             Destroy(other.gameObject);
             Destroy(this.gameObject);
+
         }
         else if (other.gameObject.GetComponent<TowerControl>() && isEnemy)
         {
@@ -28,19 +30,28 @@ public class Bullet : MonoBehaviour
         if (collision.collider.gameObject.GetComponent<TowerControl>() != null && isEnemy)
         {
             collision.collider.gameObject.GetComponent<TowerControl>().Takedamage(damage);
+            Instantiate(hitParticle, collision.contacts[0].point, Quaternion.identity);
+            hitParticle.Play();
             Destroy(this.gameObject);
+
+
         }
         else if (!isEnemy)
         {
             if (collision.collider.gameObject.TryGetComponent<RangeEnemy>(out RangeEnemy enemy))
             {
                 enemy.Takedamage(damage);
+                Instantiate(hitParticle, collision.contacts[0].point, Quaternion.identity);
+                hitParticle.Play();
                 Destroy(this.gameObject);
             }
-            else if(collision.collider.TryGetComponent<MeleeEnemy>(out MeleeEnemy meleeEnemy))
+            else if (collision.collider.TryGetComponent<MeleeEnemy>(out MeleeEnemy meleeEnemy))
             {
                 meleeEnemy.Takedamage(damage);
-                Destroy (this.gameObject);
+                Instantiate(hitParticle, collision.contacts[0].point, Quaternion.identity);
+                hitParticle.Play();
+                Destroy(this.gameObject);
+
             }
         }
     }

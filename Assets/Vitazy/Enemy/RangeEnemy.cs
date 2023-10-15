@@ -10,6 +10,7 @@ public class RangeEnemy : MonoBehaviour, IDamageble
     [SerializeField] GameObject gun;
     [SerializeField] public GameObject player;
     [SerializeField] public GameObject target;
+    [SerializeField] public GameObject objectWin;
 
 
     private bool isAttackPoint;
@@ -25,7 +26,7 @@ public class RangeEnemy : MonoBehaviour, IDamageble
 
     void Start()
     {
-        MaxHP = 100;
+        MaxHP = 2000;//HP босс
         HP = MaxHP;
 
         Damage = 8;
@@ -42,9 +43,10 @@ public class RangeEnemy : MonoBehaviour, IDamageble
     void Update()
     {
 
-        if(HP <= 0)
+        if (HP <= 0)
         {
-            Destroy(gameObject);
+            objectWin.SetActive(true);
+            Time.timeScale = 0;
         }
 
         if (player.GetComponent<ExManager>().isNewLevel)
@@ -58,13 +60,13 @@ public class RangeEnemy : MonoBehaviour, IDamageble
             m_navMeshAgent.SetDestination(player.transform.position);
             transform.LookAt(player.transform.position);
 
-            if(Vector3.Distance(transform.position, player.transform.position) < 20f)
+            if (Vector3.Distance(transform.position, player.transform.position) < 10f)
             {
                 m_navMeshAgent.Stop();
                 isAttackPoint = true;
             }
         }
-        else if(player == null)
+        else if (player == null)
         {
             Destroy(gameObject);
         }

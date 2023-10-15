@@ -5,12 +5,14 @@ using UnityEngine.UI;
 
 public class Gun : MonoBehaviour
 {
-    [SerializeField]public GameObject objbullet;
+    [SerializeField] public GameObject objbullet;
 
     public GameObject objclone;
-    public int power = 1000;
+    public int power = 10000;
 
     private float shootCooldow;
+    private float GunshootCooldown;
+    private float GunshootCooldownRemaining = 1f;
     private float startShootCooldown = 2f;
 
     public void Shoot(GameObject types, Transform bulletSpawner)
@@ -31,21 +33,21 @@ public class Gun : MonoBehaviour
 
             Debug.DrawRay(ray.origin, ray.direction * shootdistance, Color.blue, 1);
         }
-        else if(types.GetComponent<Autoturell>() != null)
+        else if (types.GetComponent<Autoturell>() != null)
         {
-            if (shootCooldow <= 0)
+            if (GunshootCooldown <= 0)
             {
                 objbullet.GetComponent<Bullet>().damage = types.GetComponent<Autoturell>().damage;
                 objbullet.GetComponent<Bullet>().isEnemy = false;
                 objclone = Instantiate(objbullet, bulletSpawner.position, Quaternion.identity);
                 objclone.GetComponent<Rigidbody>().AddForce(bulletSpawner.transform.forward * power);
                 Destroy(objclone, 10);
-                shootCooldow = startShootCooldown;
+                GunshootCooldown = GunshootCooldownRemaining;
             }
-            shootCooldow -= Time.deltaTime;
+            GunshootCooldown -= Time.deltaTime;
         }
 
-        else if (types.TryGetComponent<BossEnemy>(out BossEnemy bossEnemy)) 
+        else if (types.TryGetComponent<BossEnemy>(out BossEnemy bossEnemy))
         {
             if (shootCooldow <= 0)
             {

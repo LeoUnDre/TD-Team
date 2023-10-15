@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TowerControl : MonoBehaviour
 {
@@ -9,6 +10,11 @@ public class TowerControl : MonoBehaviour
     [SerializeField] GameObject gameSpawn;
     [SerializeField] GameObject platform;
     [SerializeField] public GameObject[] turrelSpawn;
+    [SerializeField] public AudioSource audioListener;
+    [SerializeField] GameObject pauseMenu;
+    [SerializeField] public GameObject gameOver;
+
+
     private Camera _cam;
     private float rotationSpeed = 10.0f;
 
@@ -16,6 +22,7 @@ public class TowerControl : MonoBehaviour
 
     public int MaxHP = 100;
     public int damage = 30;
+    private bool isPause;
 
     private float rotationAmount;
     Vector3 lookPos;
@@ -49,7 +56,7 @@ public class TowerControl : MonoBehaviour
             isPlatformRotate = true;
         }
 
-        if (Input.GetKeyUp(KeyCode.Q) || Input.GetKeyUp(KeyCode.E)) 
+        if (Input.GetKeyUp(KeyCode.Q) || Input.GetKeyUp(KeyCode.E))
         {
             isPlatformRotate = false;
         }
@@ -57,6 +64,24 @@ public class TowerControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             gun.GetComponent<Gun>().Shoot(this.gameObject, bulletSpawn);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!isPause)
+            {
+                Time.timeScale = 0f;
+                isPause = true;
+                audioListener.Pause();
+                pauseMenu.SetActive(true);
+            }
+            else
+            {
+                Time.timeScale = 1.0f;
+                isPause = false;
+                audioListener.Play();
+                pauseMenu.SetActive(false);
+            }
         }
 
 
@@ -106,13 +131,10 @@ public class TowerControl : MonoBehaviour
 
     private void GameOver()
     {
-        Application.Quit();
-    }
-
-    private void OnDestroy()
-    {
+        gameOver.SetActive(true);
         Time.timeScale = 0;
     }
+
 
     public void Takedamage(int damage)
     {
