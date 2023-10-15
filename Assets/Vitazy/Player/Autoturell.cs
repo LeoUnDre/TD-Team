@@ -9,22 +9,17 @@ public class Autoturell : MonoBehaviour
     [SerializeField] Transform bulletSpawn;
     [SerializeField] public GameObject owner;
     [SerializeField] public GameObject ownerSpawn;
-    [SerializeField] private int level = 1;
     [SerializeField] public GameObject[] LevelPrefab;
     [SerializeField] public int numTurrel;
     public int damage;
+    public int level;
 
     [SerializeField] public GameObject[] LevelPrefabs;
 
 
-    public int Level
-    {
-        get { return level; }
-    }
-
-
     private void Start()
     {
+        level = 1;
         damage = 25;
         bulletSpawn.transform.rotation = this.transform.rotation;
         transform.position = ownerSpawn.transform.position;
@@ -41,27 +36,18 @@ public class Autoturell : MonoBehaviour
         transform.position = ownerSpawn.transform.position;
         transform.rotation = ownerSpawn.transform.rotation;
         gun.Shoot(this.gameObject, bulletSpawn);
+        Debug.Log(level);
     }
 
-    public void LevelUp()
+    public Autoturell LevelUp()
     {
-        if (level < LevelPrefabs.Length)
-        {
-            GameObject newTurret = Instantiate(LevelPrefabs[level + 1], transform.position, transform.rotation);
-            Autoturell newTurretComponent = newTurret.GetComponent<Autoturell>();
-            newTurretComponent.owner = owner;
-            newTurretComponent.ownerSpawn = ownerSpawn;
-            newTurretComponent.level += 1;
-            newTurretComponent.LevelPrefabs = LevelPrefabs;
-            SetSelectedTurret(newTurretComponent);
-            this.gameObject.SetActive(false);
-
-        }
-    }
-
-    public void SetSelectedTurret(Autoturell turret)
-    {
-        owner.GetComponent<ExManager>().selectedTurret = turret;
-        Debug.Log(turret);
+        GameObject newTurret = Instantiate(LevelPrefabs[level + 1], transform.position, transform.rotation);
+        Autoturell newTurretComponent = newTurret.GetComponent<Autoturell>();
+        newTurretComponent.owner = owner;
+        newTurretComponent.ownerSpawn = ownerSpawn;
+        newTurretComponent.level = level + 1;
+        newTurretComponent.LevelPrefabs = LevelPrefabs;
+        Destroy(gameObject);
+        return newTurretComponent;
     }
 }

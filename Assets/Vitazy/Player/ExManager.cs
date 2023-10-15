@@ -9,21 +9,19 @@ using UnityEngine.UIElements;
 
 public class ExManager : MonoBehaviour
 {
+    [SerializeField] GameObject levelMenu;
     [SerializeField] GameObject[] enemyPrefabs;
-    [SerializeField] GameObject[] FirePrefabs;
-    [SerializeField] GameObject[] LaserPrefabs;
-    [SerializeField] GameObject[] MachinePrefabs;
+    [SerializeField] GameObject[] fireTurrel;
+    [SerializeField] GameObject[] laserTurrel;
+    [SerializeField] GameObject[] machineTurrel;
     [SerializeField] GameObject platform;
-    [SerializeField]public List<GameObject> TurrelPrefabs;
     [SerializeField] public int SelectedIndex;
+    private Autoturell [] existTurrel = {null, null, null, null};
     private Autoturell tOwner;
     private int Xp;
     private int NextLevelXp;
-    public int Level;
+    public int level;
     public bool isNewLevel = false;
-    private bool isFull;
-    private Autoturell[] existTurrel = new Autoturell[4];
-    public Autoturell selectedTurret;
 
 
 
@@ -31,7 +29,7 @@ public class ExManager : MonoBehaviour
     {
         Xp = 0;
         NextLevelXp = 10;
-        Level = 1;
+        level = 1;
     }
 
     private void Update()
@@ -40,7 +38,7 @@ public class ExManager : MonoBehaviour
         if (Xp == NextLevelXp)
         {
             SetNewLevel();
-            Debug.Log("New Level" + Level);
+            Debug.Log("New Level" + level);
             Debug.Log(this.GetComponent<TowerControl>().damage);
         }
     }
@@ -48,11 +46,31 @@ public class ExManager : MonoBehaviour
 
     private void SetNewLevel()
     {
-        Level += 1;
+        level += 1;
         NextLevelXp += 100;
         Xp = 0;
-        isNewLevel = true;
-        this.GetComponent<TowerControl>().damage += 10;
+        if (level <= 12)
+        {
+            isNewLevel = true;
+            this.GetComponent<TowerControl>().damage += 10;
+            OpenMenuLevel();
+        }
+    }
+
+    private void OpenMenuLevel()
+    {
+        if (isNewLevel) 
+        {
+            Time.timeScale = 0;
+            levelMenu.SetActive(true);
+            isNewLevel = false;
+        }
+    }
+
+    private void CloseMenuLevel()
+    {
+        Time.timeScale = 1.0f;
+        levelMenu.SetActive(false);
     }
 
     public bool IsFree(List<GameObject> turrelPrefab, int selInd)
@@ -67,13 +85,57 @@ public class ExManager : MonoBehaviour
         }
     }
 
-    public void UpgradeThisExistTurrel()
+    public void SetNewTurrel(GameObject[] prefabTurrel, int numTurrel, int selectedIndex, List<GameObject> turrelPrefabs)
     {
-        if (selectedTurret != null)
-        {
-            if (selectedTurret.Level < selectedTurret.LevelPrefabs.Length)
+            switch (numTurrel)
             {
-                selectedTurret.LevelUp();
+                case 0:
+                    AddNemTurrel(prefabTurrel, numTurrel, selectedIndex, turrelPrefabs);
+                    CloseMenuLevel();
+                    break;
+                case 1:
+                    AddNemTurrel(prefabTurrel, numTurrel, selectedIndex, turrelPrefabs);
+                    CloseMenuLevel();
+                    break;
+                case 2:
+                    AddNemTurrel(prefabTurrel, numTurrel, selectedIndex, turrelPrefabs);
+                    CloseMenuLevel();
+                    break;
+            }
+    }
+
+    private void AddNemTurrel(GameObject[] prefab, int IdTurrel, int selectedIndex, List<GameObject> turrelPrefabs)
+    {
+        if (turrelPrefabs != null)
+        {
+            if (!IsFree(turrelPrefabs, selectedIndex))
+            {
+                GameObject turrell = turrelPrefabs[selectedIndex];
+                GameObject turrel = Instantiate(prefab[0], turrell.transform.position, Quaternion.identity);
+                tOwner = turrel.GetComponent<Autoturell>();
+                tOwner.LevelPrefabs = prefab;
+                tOwner.owner = this.gameObject;
+                tOwner.numTurrel = IdTurrel;
+                tOwner.level = 1;
+                tOwner.ownerSpawn = turrell.gameObject;
+                existTurrel[selectedIndex] = tOwner;
+
+            }
+            else
+            {
+            }
+        }
+    }
+
+
+    public void UpgradeThisExistTurrel(int selIndex)
+    {
+        if (existTurrel[selIndex] != null)
+        {
+            if (existTurrel[selIndex].level < existTurrel[selIndex].LevelPrefabs.Length)
+            {
+                existTurrel[selIndex] = existTurrel[selIndex].LevelUp();
+                CloseMenuLevel();
             }
             else
             {
